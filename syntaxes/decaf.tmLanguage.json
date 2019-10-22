@@ -3,18 +3,106 @@
 	"name": "Decaf",
 	"patterns": [
 		{
+			"include": "#comments"
+		},
+		{
 			"include": "#keywords"
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#storage-modifiers"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"match": ",",
+			"name": "punctuation.separator.delimiter.decaf"
+		},
+		{
+			"match": "\\.",
+			"name": "punctuation.separator.period.decaf"
+		},
+		{
+			"match": ";",
+			"name": "punctuation.terminator.decaf"
 		}
 	],
 	"repository": {
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.decaf",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
+			"patterns": [
+				{
+					"match": "\\b(break|else|for|if|return|while)\\b",
+					"name": "keyword.control.decaf"
+				},
+				{
+					"match": "\\b(instanceof)\\b",
+					"name": "keyword.operator.instanceof.decaf"
+				},
+				{
+					"match": "(\\+|\\-|\\*|\\/|%)",
+					"name": "keyword.operator.arithmetic.decaf"
+				},
+				{
+					"match": "(&&|\\|\\||!)",
+					"name": "keyword.operator.logical.decaf"
+				},
+				{
+					"match": "(<|<=|>|>=|==|!=)",
+					"name": "keyword.operator.comparison.decaf"
+				},
+				{
+					"match": "(=)",
+					"name": "keyword.operator.assignment.decaf"
+				},
+				{
+					"match": "\\b(Print|ReadInteger|ReadInteger)\\b",
+					"name": "support.function.builtin_fn.decaf"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"include": "#primitive-types"
+				}
+			]
+		},
+		"primitive-types": {
+			"match": "\\b(bool|int|string|void)\\b",
+			"name": "storage.type.primitive.decaf"
+		},
+		"constants": {
+			"patterns": [
+				{
+					"match": "\\b(true|false|null)\\b",
+					"name": "constant.language.decaf"
+				},
+				{
+					"match": "\\bthis\\b",
+					"name": "variable.language.this.decaf"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"match": "0[Xx][0-9A-Fa-f]+",
+					"name": "constant.numeric.hex.decaf"
+				},
+				{
+					"match": "[0-9]+",
+					"name": "constant.numeric.decimal.decaf"
+				}
+			]
 		},
 		"strings": {
 			"name": "string.quoted.double.decaf",
@@ -23,9 +111,23 @@
 			"patterns": [
 				{
 					"name": "constant.character.escape.decaf",
-					"match": "\\\\."
+					"match": "\\\\[nrt\"\\\\]"
 				}
 			]
+		},
+		"storage-modifiers": {
+			"match": "\\b(static)\\b",
+			"name": "storage.modifier.static.decaf"
+		},
+		"comments": {
+			"name": "comment.line.decaf",
+			"begin": "//",
+			"end": "(\\r|\\n|\\r\\n)",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.decaf"
+				}
+			}
 		}
 	},
 	"scopeName": "source.decaf"

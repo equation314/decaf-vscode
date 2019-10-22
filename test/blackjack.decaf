@@ -140,7 +140,7 @@ class Player {
             Hit(deck);
             Print(name, ", your total is ", total, ".\n");
             return true;
-        } else 
+        } else
             return false;
     }
 
@@ -257,7 +257,7 @@ class House {
         rnd = new rndModule();
         Print("Please enter a random number seed: ");
         rnd.Init(ReadInteger());
- 
+
         deck = new BJDeck();
         dealer = new Dealer();
         deck.Init(rnd);
@@ -339,7 +339,7 @@ class Main {
         Print("\nCS143 BlackJack Copyright (c) 1999 by Peter Mork.\n");
         Print("(2001 mods by jdz)\n");
     }
-    
+
     static bool GetYesOrNo(string prompt) {
         Print(prompt, " (0=No/1=Yes) ");
         return ReadInteger() != 0;

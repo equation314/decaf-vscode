@@ -3,40 +3,60 @@
 	"name": "Decaf",
 	"patterns": [
 		{
-			"include": "#comments"
-		},
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"include": "#numbers"
-		},
-		{
-			"include": "#constants"
-		},
-		{
-			"include": "#storage-modifiers"
-		},
-		{
-			"include": "#types"
-		},
-		{
-			"match": ",",
-			"name": "punctuation.separator.delimiter.decaf"
-		},
-		{
-			"match": "\\.",
-			"name": "punctuation.separator.period.decaf"
-		},
-		{
-			"match": ";",
-			"name": "punctuation.terminator.decaf"
+			"include": "#code"
 		}
 	],
 	"repository": {
+		"code": {
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"include": "#constants"
+				},
+				{
+					"include": "#class"
+				},
+				{
+					"include": "#parens"
+				},
+				{
+					"include": "#types"
+				},
+				{
+					"include": "#functions"
+				},
+				{
+					"include": "#variables"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.delimiter.decaf"
+				},
+				{
+					"match": "\\.",
+					"name": "punctuation.separator.period.decaf"
+				},
+				{
+					"match": ";",
+					"name": "punctuation.terminator.decaf"
+				},
+				{
+					"match": "\\S",
+					"name": "invalid.illegal.decaf"
+				}
+			]
+		},
 		"keywords": {
 			"patterns": [
 				{
@@ -45,7 +65,15 @@
 				},
 				{
 					"match": "\\b(instanceof)\\b",
-					"name": "keyword.operator.instanceof.decaf"
+					"name": "keyword.other.instanceof.decaf"
+				},
+				{
+					"match": "\\b(new)\\b",
+					"name": "keyword.operator.new.decaf"
+				},
+				{
+					"match": "\\b(static)\\b",
+					"name": "storage.modifier.static.decaf"
 				},
 				{
 					"match": "(\\+|\\-|\\*|\\/|%)",
@@ -69,16 +97,141 @@
 				}
 			]
 		},
+		"class": {
+			"begin": "\\b(class)\\b\\s*([A-Za-z][_0-9A-Za-z]*)\\s*(\\b(extends)\\b\\s*([A-Za-z][_0-9A-Za-z]*))?\\s*{",
+			"end": "}",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.class.decaf"
+				},
+				"2": {
+					"name": "entity.name.type.class.decaf"
+				},
+				"4": {
+					"name": "storage.modifier.extends.decaf"
+				},
+				"5": {
+					"name": "entity.name.type.class.decaf"
+				}
+			},
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.bracket.curly.decaf"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#code"
+				}
+			]
+		},
 		"types": {
 			"patterns": [
 				{
+					"include": "#primitive-arrays"
+				},
+				{
 					"include": "#primitive-types"
+				},
+				{
+					"include": "#class-types"
+				}
+			]
+		},
+		"primitive-arrays": {
+			"patterns": [
+				{
+					"begin": "\\b(bool|int|string|void)\\b\\s*(?=\\[)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.primitive.array.java"
+						}
+					},
+					"end": "(?!\\s*\\[)",
+					"patterns": [
+						{
+							"include": "#parens"
+						}
+					]
 				}
 			]
 		},
 		"primitive-types": {
 			"match": "\\b(bool|int|string|void)\\b",
 			"name": "storage.type.primitive.decaf"
+		},
+		"class-types": {
+			"begin": "\\b(class)\\b\\s*([A-Za-z][_0-9A-Za-z]*)",
+			"end": "\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.class.decaf"
+				},
+				"2": {
+					"name": "entity.name.type.class.decaf"
+				}
+			}
+		},
+		"parens": {
+			"patterns": [
+				{
+					"begin": "\\(",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.bracket.round.decaf"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.bracket.round.decaf"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				},
+				{
+					"begin": "\\[",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.bracket.square.decaf"
+						}
+					},
+					"end": "\\]",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.bracket.square.decaf"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				},
+				{
+					"begin": "{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.bracket.curly.decaf"
+						}
+					},
+					"end": "}",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.bracket.curly.decaf"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				}
+			]
 		},
 		"constants": {
 			"patterns": [
@@ -115,10 +268,6 @@
 				}
 			]
 		},
-		"storage-modifiers": {
-			"match": "\\b(static)\\b",
-			"name": "storage.modifier.static.decaf"
-		},
 		"comments": {
 			"name": "comment.line.decaf",
 			"begin": "//",
@@ -128,6 +277,24 @@
 					"name": "punctuation.definition.comment.decaf"
 				}
 			}
+		},
+		"functions": {
+			"begin": "([A-Za-z][_0-9A-Za-z]*)\\s*\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.decaf"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#code"
+				}
+			]
+		},
+		"variables": {
+			"match": "([A-Za-z][_0-9A-Za-z]*)",
+			"name": "variable.other.decaf"
 		}
 	},
 	"scopeName": "source.decaf"

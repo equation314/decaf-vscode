@@ -28,10 +28,10 @@
 					"include": "#class"
 				},
 				{
-					"include": "#parens"
+					"include": "#types"
 				},
 				{
-					"include": "#types"
+					"include": "#parens"
 				},
 				{
 					"include": "#functions"
@@ -161,16 +161,37 @@
 			"name": "storage.type.primitive.decaf"
 		},
 		"class-types": {
-			"begin": "\\b(class)\\b\\s*([A-Za-z][_0-9A-Za-z]*)",
-			"end": "\\s+",
-			"beginCaptures": {
-				"1": {
-					"name": "storage.type.class.decaf"
+			"patterns": [
+				{
+					"begin": "\\b(class)\\b\\s*([A-Za-z][_0-9A-Za-z]*)\\s*(?=\\[)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.class.decaf"
+						},
+						"2": {
+							"name": "entity.name.type.class.array.decaf"
+						}
+					},
+					"end": "(?!\\s*\\[)",
+					"patterns": [
+						{
+							"include": "#parens"
+						}
+					]
 				},
-				"2": {
-					"name": "entity.name.type.class.decaf"
+				{
+					"begin": "\\b(class)\\b\\s*([A-Za-z][_0-9A-Za-z]*)",
+					"end": "\\s*",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.class.decaf"
+						},
+						"2": {
+							"name": "entity.name.type.class.decaf"
+						}
+					}
 				}
-			}
+			]
 		},
 		"parens": {
 			"patterns": [

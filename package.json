@@ -4,7 +4,7 @@
     "description": "Decaf language syntax highlighting for Visual Studio Code",
     "version": "0.0.1",
 	"preview": true,
-	"icon": "logo.png",
+	"icon": "images/logo.png",
     "engines": {
         "vscode": "^1.39.0"
     },

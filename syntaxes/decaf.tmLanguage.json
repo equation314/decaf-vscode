@@ -144,7 +144,7 @@
 					"begin": "\\b(bool|int|string|void)\\b\\s*(?=\\[)",
 					"beginCaptures": {
 						"1": {
-							"name": "storage.type.primitive.array.java"
+							"name": "storage.type.primitive.array.decaf"
 						}
 					},
 					"end": "(?!\\s*\\[)",
@@ -162,7 +162,7 @@
 		},
 		"class-types": {
 			"begin": "\\b(class)\\b\\s*([A-Za-z][_0-9A-Za-z]*)",
-			"end": "\\s*",
+			"end": "\\s+",
 			"beginCaptures": {
 				"1": {
 					"name": "storage.type.class.decaf"

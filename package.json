@@ -3,12 +3,26 @@
     "displayName": "Decaf",
     "description": "Decaf language syntax highlighting for Visual Studio Code",
     "version": "0.0.1",
+	"preview": true,
+	"icon": "logo.png",
     "engines": {
         "vscode": "^1.39.0"
     },
+	"author": {
+		"name": "Yuekai Jia"
+	},
+	"publisher": "equation314",
     "categories": [
         "Programming Languages"
     ],
+	"keywords": [
+		"decaf",
+		"decaf-lang"
+	],
+	"repository": {
+		"url": "https://github.com/equation314/decaf-vscode",
+		"type": "git"
+	},
     "contributes": {
         "languages": [{
             "id": "decaf",
